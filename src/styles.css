@@ -72,3 +72,14 @@
 .aboutGrid .Card p,.aboutGrid .Card span{font-size:19px!important;line-height:1.58!important;color:#c4d9db!important}
 .aboutGrid .Card:after{content:"";width:54px;height:4px;border-radius:4px;background:linear-gradient(90deg,#22c7b4,#159bd4);margin-top:auto;padding-top:0}
 @media(max-width:760px){.aboutGrid{grid-template-columns:1fr;gap:16px}.aboutGrid .Card{min-height:190px;padding:28px!important}.aboutGrid .Card h2{font-size:25px!important}.aboutGrid .Card p,.aboutGrid .Card span{font-size:17px!important}}
+
+/* FINAL VISUAL FIXES */
+.coverLogo{background:#fff!important;width:150px!important;height:78px!important;flex:0 0 150px!important;border-radius:18px!important;padding:6px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-shadow:0 10px 24px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.95)!important}
+.coverLogo img{width:108px!important;height:66px!important;object-fit:contain!important;border-radius:0!important;display:block!important}
+.aboutGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:28px!important}
+.aboutBlock{min-height:245px!important;padding:38px 42px!important;border-radius:28px!important;background:linear-gradient(145deg,#123f4d 0%,#0a2d3a 55%,#061d27 100%)!important;border:1px solid rgba(99,224,215,.25)!important;box-shadow:0 18px 42px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.08)!important;display:flex!important;flex-direction:column!important}
+.aboutBlock h2{font-size:30px!important;line-height:1.12!important;color:#fff!important;margin:0 0 22px!important}
+.aboutBlock .vkuiText{font-size:19px!important;line-height:1.62!important;color:#d2e2e4!important}
+.aboutBlock:after{content:"";display:block;width:58px;height:4px;border-radius:99px;background:linear-gradient(90deg,#22c7b4,#159bd4);margin-top:auto}
+@media(max-width:1100px){.coverLogo{width:126px!important;flex-basis:126px!important}.coverLogo img{width:96px!important;height:62px!important}}
+@media(max-width:760px){.coverLogo{width:76px!important;height:58px!important;flex-basis:76px!important;padding:4px!important;border-radius:14px!important}.coverLogo img{width:62px!important;height:50px!important}.aboutGrid{grid-template-columns:1fr!important}.aboutBlock{min-height:210px!important;padding:28px!important}.aboutBlock h2{font-size:25px!important}.aboutBlock .vkuiText{font-size:17px!important}}
