@@ -100,3 +100,56 @@
 .juryEmpty{min-height:600px;display:grid;place-items:center;align-content:center;text-align:center}.juryEmpty span{font-size:11px;letter-spacing:3px;color:#36c6bd}.juryEmpty h2{font-size:34px;color:#fff;margin:12px}.juryEmpty p{max-width:470px;color:#8fb7bc;font-size:17px;line-height:1.6}
 @media(max-width:900px){.juryWorkspace{grid-template-columns:1fr}.juryList{position:static}.juryScore{grid-template-columns:1fr 1.2fr 45px}.juryWorkspaceMain{padding:18px}}
 @media(max-width:600px){.juryScore{grid-template-columns:1fr 48px;gap:12px}.juryScore input{grid-column:1/3}.juryTotal{flex-wrap:wrap}.juryTotal .vkuiButton{width:100%}}
+
+
+/* ABOUT TYPOGRAPHY — readability pass */
+.aboutBlock {
+  min-height: 260px !important;
+  padding: 40px 44px !important;
+}
+.aboutBlock h2 {
+  font-size: 34px !important;
+  line-height: 1.12 !important;
+  margin: 0 0 24px !important;
+  font-weight: 800 !important;
+}
+.aboutBlock .vkuiText,
+.aboutBlock p,
+.aboutBlock div,
+.aboutBlock span {
+  font-size: 22px !important;
+  line-height: 1.58 !important;
+  color: #d8e8e9 !important;
+}
+.pageHead h1 {
+  font-size: 52px !important;
+}
+.pageHead .lead,
+.pageHead .vkuiText {
+  font-size: 21px !important;
+  line-height: 1.55 !important;
+}
+@media (max-width: 1100px) {
+  .aboutBlock .vkuiText,
+  .aboutBlock p,
+  .aboutBlock div,
+  .aboutBlock span { font-size: 20px !important; }
+  .aboutBlock h2 { font-size: 31px !important; }
+}
+@media (max-width: 760px) {
+  .aboutBlock {
+    min-height: 210px !important;
+    padding: 30px !important;
+  }
+  .aboutBlock h2 { font-size: 28px !important; }
+  .aboutBlock .vkuiText,
+  .aboutBlock p,
+  .aboutBlock div,
+  .aboutBlock span {
+    font-size: 18px !important;
+    line-height: 1.55 !important;
+  }
+  .pageHead h1 { font-size: 38px !important; }
+  .pageHead .lead,
+  .pageHead .vkuiText { font-size: 18px !important; }
+}
