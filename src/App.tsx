@@ -1,4 +1,4 @@
-import {useMemo,useState} from "react";
+import {useEffect,useMemo,useState} from "react";
 import type {ReactNode,ChangeEvent} from "react";
 import {Icon28ArrowLeftOutline,Icon28ChevronRightOutline} from "@vkontakte/icons";
 import {Button,Input,Textarea,Card,Div,Title,Text,Separator} from "@vkontakte/vkui";
@@ -37,7 +37,7 @@ function Jury(){
   const [selected,setSelected]=useState("");
   const [score,setScore]=useState<Score>({idea:10,english:10,originality:10,design:10,digital:10});
   const [saved,setSaved]=useState(false);
-  useState(()=>{let cancelled=false;(async()=>{try{const base=(import.meta.env.VITE_API_URL||"").replace(/\/$/,"");if(!base){setAuthorized(false);return}const r=await fetch(base+"/api/me",{credentials:"include"});if(!r.ok){setAuthorized(false);return}const me=await r.json();if(me?.role!=="jury"&&me?.role!=="organizer"){setAuthorized(false);return}const wr=await fetch(base+"/api/submissions",{credentials:"include"});const data=await wr.json();if(!cancelled){setWorks((data.submissions||[]).filter((x:Submission)=>x.status==="published"||x.status==="winner"));setAuthorized(true)}}catch{if(!cancelled)setAuthorized(false)}})();return()=>{cancelled=true}},[]);
+  useEffect(()=>{let cancelled=false;(async()=>{try{const base=(import.meta.env.VITE_API_URL||"").replace(/\/$/,"");if(!base){setAuthorized(false);return}const r=await fetch(base+"/api/me",{credentials:"include"});if(!r.ok){setAuthorized(false);return}const me=await r.json();if(me?.role!=="jury"&&me?.role!=="organizer"){setAuthorized(false);return}const wr=await fetch(base+"/api/submissions",{credentials:"include"});const data=await wr.json();if(!cancelled){setWorks((data.submissions||[]).filter((x:Submission)=>x.status==="published"||x.status==="winner"));setAuthorized(true)}}catch{if(!cancelled)setAuthorized(false)}})();return()=>{cancelled=true}},[]);
   if(authorized===null)return <Page title="Жюри" lead="Проверка доступа к закрытой зоне жюри."><Card className="juryGate"><div className="gateIcon">◆</div><Title level="2">Проверяем полномочия</Title><Text>Доступ к оцениванию открыт только членам жюри.</Text></Card></Page>;
   if(!authorized)return <Page title="Закрытая зона жюри" lead="Этот раздел не является публичной частью конкурса."><Card className="juryGate"><div className="gateIcon">🔒</div><Title level="2">Доступ ограничен</Title><Text>Для работы с оценками необходима авторизация пользователя с ролью «Жюри».</Text><div className="juryGateRule"><b>Анонимность:</b> жюри видит номер и содержание работы, но не имя, группу и контакты автора.</div></Card></Page>;
   const current=works.find(w=>w.id===selected);
