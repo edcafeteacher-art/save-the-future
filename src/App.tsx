@@ -13,51 +13,55 @@ function Logo(){return <div className="logo"><img className="collegeLogo" src="/
 function Header({view,setView}:{view:View;setView:(v:View)=>void}){return <header className="topbar"><button className="mobileBack" onClick={()=>setView("home")}><Icon28ArrowLeftOutline/></button><Logo/><nav className="nav">{nav.map(([id,label,icon])=><button key={id} className={view===id?"active":""} onClick={()=>setView(id)}><i>{icon}</i>{label}</button>)}</nav><button className="lang">EN</button></header>}
 function Hero({setView}:{setView:(v:View)=>void}){return <section className="hero"><div className="heroCopy"><div className="eyebrow">WORLD SAVINGS DAY · OCTOBER 31</div><h1>SAVE <em>THE FUTURE</em></h1><div className="sub">AI DIGITAL POSTER CHALLENGE</div><p>Smart choices today. A more secure tomorrow.</p><div className="pillrow"><span>FINANCIAL LITERACY</span><span>INNOVATION WITH AI</span><span>BRIGHTER OPPORTUNITIES</span></div></div><div className="heroArt"><div className="chart"><span>+24%</span><div className="bars"><i/><i/><i/><i/><i/></div></div><div className="coin c1">₽</div><div className="coin c2">$</div><div className="pig">◒</div></div><div className="heroActions"><Button mode="primary" size="l" onClick={()=>setView("exhibition")}>Смотреть работы <Icon28ChevronRightOutline/></Button><Button mode="secondary" size="l" onClick={()=>setView("join")}>Подать работу</Button></div></section>}
 function ApprovedCover({setView}:{setView:(v:View)=>void}){
+  const [en,setEn]=useState(false);
+  const labels=en
+    ? {home:"Home",exhibition:"Exhibition",join:"Participant",jury:"Jury",results:"Results",about:"About",watch:"VIEW WORKS",submit:"SUBMIT WORK",judge:"JUDGE WORKS",outcomes:"CONTEST RESULTS",goals:"GOALS & NOMINATIONS",headline:"AI DIGITAL POSTER CHALLENGE",tagline:"Smart choices today. A more secure tomorrow.",pill:"WORLD SAVINGS DAY · OCTOBER 31",f1:"FINANCIAL LITERACY",f2:"INNOVATION WITH AI",f3:"BRIGHTER OPPORTUNITIES",foot:"© 2026 SAVE THE FUTURE · VSproduction"}
+    : {home:"Главная",exhibition:"Выставка",join:"Участнику",jury:"Жюри",results:"Результаты",about:"О конкурсе",watch:"СМОТРЕТЬ РАБОТЫ",submit:"ПОДАТЬ РАБОТУ",judge:"ОЦЕНИВАТЬ РАБОТЫ",outcomes:"ИТОГИ КОНКУРСА",goals:"ЦЕЛИ И НОМИНАЦИИ",headline:"AI DIGITAL POSTER CHALLENGE",tagline:"Smart choices today. A more secure tomorrow.",pill:"WORLD SAVINGS DAY · OCTOBER 31",f1:"FINANCIAL LITERACY",f2:"INNOVATION WITH AI",f3:"BRIGHTER OPPORTUNITIES",foot:"© 2026 SAVE THE FUTURE · VSproduction"};
   const links:[View,string][]=[
-    ["home","Главная"],["exhibition","Выставка"],["join","Участнику"],["jury","Жюри"],["results","Результаты"],["about","О конкурсе"]
+    ["home",labels.home],["exhibition",labels.exhibition],["join",labels.join],["jury",labels.jury],["results",labels.results],["about",labels.about]
   ];
   const cards:[View,string,string,string][]=[
-    ["exhibition","ВЫСТАВКА","СМОТРЕТЬ РАБОТЫ","01"],
-    ["join","УЧАСТНИКУ","ПОДАТЬ РАБОТУ","02"],
-    ["jury","ЖЮРИ","ОЦЕНИВАТЬ РАБОТЫ","03"],
-    ["results","РЕЗУЛЬТАТЫ","ИТОГИ КОНКУРСА","04"],
-    ["about","О КОНКУРСЕ","ЦЕЛИ И НОМИНАЦИИ","05"]
+    ["exhibition",labels.exhibition,labels.watch,"01"],
+    ["join",labels.join,labels.submit,"02"],
+    ["jury",labels.jury,labels.judge,"03"],
+    ["results",labels.results,labels.outcomes,"04"],
+    ["about",labels.about,labels.goals,"05"]
   ];
   return <main className="coverPage">
     <div className="coverShell">
       <header className="coverNav">
         <button className="coverLogo" onClick={()=>setView("home")} aria-label="Главная"><img src="/save-the-future/college-logo.png" alt="Московский финансовый колледж"/></button>
         <nav className="coverNavLinks">
-          {links.map(([id,label])=><button key={id} className={id==="home"?"isActive":""} onClick={()=>setView(id)}>{label}</button>)}
+          {links.map(([id,label])=><button key={id} className={id==="home"?"isActive":""} onClick={()=>setView(id)}><span className="coverNavIcon">{id==="home"?"⌂":id==="exhibition"?"▧":id==="join"?"＋":id==="jury"?"♧":id==="results"?"▥":"ⓘ"}</span>{label}</button>)}
         </nav>
-        <button className="coverLang" onClick={()=>{}}>◎ <span>EN</span>⌄</button>
+        <button className="coverLang" onClick={()=>setEn(v=>!v)} aria-label="Switch language"><span className="globe">◎</span><span>{en?"RU":"EN"}</span><span className="langChevron">⌄</span></button>
       </header>
       <section className="coverHero">
         <div className="coverCopy">
           <div className="coverKicker">WORLD SAVINGS DAY · OCTOBER 31</div>
           <h1><span>SAVE</span><br/><strong>THE <em>FUTURE</em></strong></h1>
-          <div className="coverSub">AI DIGITAL POSTER CHALLENGE</div>
-          <p>Smart choices today. A more secure tomorrow.</p>
-          <div className="coverPill">WORLD SAVINGS DAY · OCTOBER 31</div>
+          <div className="coverSub">{labels.headline}</div>
+          <p>{labels.tagline}</p>
+          <button className="coverPill" onClick={()=>setView("exhibition")}><span>▣</span>{labels.pill}<b>›</b></button>
           <div className="coverThemes">
-            <div><b>01</b><span>FINANCIAL<br/>LITERACY</span></div>
-            <div><b>02</b><span>INNOVATION<br/>WITH AI</span></div>
-            <div><b>03</b><span>BRIGHTER<br/>OPPORTUNITIES</span></div>
+            <div><i>◉</i><span>{labels.f1}</span></div>
+            <div><i>✦</i><span>{labels.f2}</span></div>
+            <div><i>▥</i><span>{labels.f3}</span></div>
           </div>
         </div>
         <div className="coverPhoto" aria-hidden="true">
           <img src="/save-the-future/approved-cover-final.webp" alt=""/>
-          <div className="coverPhotoShade"/>
-          <div className="coverPhotoLabel"><span>SMART</span><b>CHOICES</b><small>today → tomorrow</small></div>
+          <div className="coverPhotoOverlay"/>
+          <div className="coverPhotoWords"><span>Knowledge</span><span>Savings</span><span>Opportunities</span><span>Your Future</span></div>
         </div>
       </section>
       <section className="coverCards">
-        {cards.map(([id,title,sub,no])=><button key={id} className="coverCard" onClick={()=>setView(id)}>
-          <span className="coverCardNo">{no}</span><span className="coverCardArrow">↗</span>
-          <b>{title}</b><small>{sub}</small>
+        {cards.map(([id,title,sub,no])=><button key={id} className={"coverCard card-"+no} onClick={()=>setView(id)}>
+          <span className="coverCardNo">{no}</span><span className="coverCardIcon">{id==="exhibition"?"▧":id==="join"?"▤":id==="jury"?"♧":id==="results"?"♜":"ⓘ"}</span>
+          <b>{title}</b><small>{sub}</small><span className="coverCardArrow">›</span>
         </button>)}
       </section>
-      <footer className="coverFooter"><span>Московский финансовый колледж</span><span>© 2026 SAVE THE FUTURE · VSproduction</span></footer>
+      <footer className="coverFooter"><span>{labels.foot}</span></footer>
     </div>
   </main>
 }
