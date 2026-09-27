@@ -9,11 +9,58 @@ import {criteria} from "./types";
 type View="home"|"exhibition"|"join"|"jury"|"results"|"about"|"poster";
 const nav:[View,string,string][]=[["home","Главная","⌂"],["exhibition","Выставка","▧"],["join","Участнику","＋"],["jury","Жюри","★"],["results","Результаты","◉"],["about","О конкурсе","i"]];
 
-function Logo(){return <div className="logo"><img className="collegeLogo" src="./college-logo.png" alt="Московский финансовый колледж" /></div>}
+function Logo(){return <div className="logo"><img className="collegeLogo" src="/save-the-future/college-logo.png" alt="Московский финансовый колледж" /></div>}
 function Header({view,setView}:{view:View;setView:(v:View)=>void}){return <header className="topbar"><button className="mobileBack" onClick={()=>setView("home")}><Icon28ArrowLeftOutline/></button><Logo/><nav className="nav">{nav.map(([id,label,icon])=><button key={id} className={view===id?"active":""} onClick={()=>setView(id)}><i>{icon}</i>{label}</button>)}</nav><button className="lang">EN</button></header>}
 function Hero({setView}:{setView:(v:View)=>void}){return <section className="hero"><div className="heroCopy"><div className="eyebrow">WORLD SAVINGS DAY · OCTOBER 31</div><h1>SAVE <em>THE FUTURE</em></h1><div className="sub">AI DIGITAL POSTER CHALLENGE</div><p>Smart choices today. A more secure tomorrow.</p><div className="pillrow"><span>FINANCIAL LITERACY</span><span>INNOVATION WITH AI</span><span>BRIGHTER OPPORTUNITIES</span></div></div><div className="heroArt"><div className="chart"><span>+24%</span><div className="bars"><i/><i/><i/><i/><i/></div></div><div className="coin c1">₽</div><div className="coin c2">$</div><div className="pig">◒</div></div><div className="heroActions"><Button mode="primary" size="l" onClick={()=>setView("exhibition")}>Смотреть работы <Icon28ChevronRightOutline/></Button><Button mode="secondary" size="l" onClick={()=>setView("join")}>Подать работу</Button></div></section>}
-function ApprovedCover({setView}:{setView:(v:View)=>void}){const links:[string,View,string][]=[["nav-home","home","Главная"],["nav-exhibition","exhibition","Выставка"],["nav-join","join","Участнику"],["nav-jury","jury","Жюри"],["nav-results","results","Результаты"],["nav-about","about","О конкурсе"],["card-exhibition","exhibition","Выставка"],["card-join","join","Участнику"],["card-jury","jury","Жюри"],["card-results","results","Результаты"],["card-about","about","О конкурсе"]];return <main className="approvedCover" aria-label="SAVE THE FUTURE approved cover"><div className="approvedStage"><img className="approvedCoverImage" src="/save-the-future/approved-cover-final.webp" alt="SAVE THE FUTURE — AI Digital Poster Challenge" /><div className="approvedHotspots">{links.map(([cls,v,label])=><button key={cls} className={"approvedHotspot "+cls} aria-label={label} onClick={()=>setView(v)} />)}<button className="approvedHotspot nav-lang" aria-label="English" onClick={()=>{}} /></div></div></main>}
-
+function ApprovedCover({setView}:{setView:(v:View)=>void}){
+  const links:[View,string][]=[
+    ["home","Главная"],["exhibition","Выставка"],["join","Участнику"],["jury","Жюри"],["results","Результаты"],["about","О конкурсе"]
+  ];
+  const cards:[View,string,string,string][]=[
+    ["exhibition","ВЫСТАВКА","СМОТРЕТЬ РАБОТЫ","01"],
+    ["join","УЧАСТНИКУ","ПОДАТЬ РАБОТУ","02"],
+    ["jury","ЖЮРИ","ОЦЕНИВАТЬ РАБОТЫ","03"],
+    ["results","РЕЗУЛЬТАТЫ","ИТОГИ КОНКУРСА","04"],
+    ["about","О КОНКУРСЕ","ЦЕЛИ И НОМИНАЦИИ","05"]
+  ];
+  return <main className="coverPage">
+    <div className="coverShell">
+      <header className="coverNav">
+        <button className="coverLogo" onClick={()=>setView("home")} aria-label="Главная"><img src="/save-the-future/college-logo.png" alt="Московский финансовый колледж"/></button>
+        <nav className="coverNavLinks">
+          {links.map(([id,label])=><button key={id} className={id==="home"?"isActive":""} onClick={()=>setView(id)}>{label}</button>)}
+        </nav>
+        <button className="coverLang" onClick={()=>{}}>◎ <span>EN</span>⌄</button>
+      </header>
+      <section className="coverHero">
+        <div className="coverCopy">
+          <div className="coverKicker">WORLD SAVINGS DAY · OCTOBER 31</div>
+          <h1><span>SAVE</span><br/><strong>THE <em>FUTURE</em></strong></h1>
+          <div className="coverSub">AI DIGITAL POSTER CHALLENGE</div>
+          <p>Smart choices today. A more secure tomorrow.</p>
+          <div className="coverPill">WORLD SAVINGS DAY · OCTOBER 31</div>
+          <div className="coverThemes">
+            <div><b>01</b><span>FINANCIAL<br/>LITERACY</span></div>
+            <div><b>02</b><span>INNOVATION<br/>WITH AI</span></div>
+            <div><b>03</b><span>BRIGHTER<br/>OPPORTUNITIES</span></div>
+          </div>
+        </div>
+        <div className="coverPhoto" aria-hidden="true">
+          <img src="/save-the-future/save-future-hero-photo-clean.webp" alt=""/>
+          <div className="coverPhotoShade"/>
+          <div className="coverPhotoLabel"><span>SMART</span><b>CHOICES</b><small>today → tomorrow</small></div>
+        </div>
+      </section>
+      <section className="coverCards">
+        {cards.map(([id,title,sub,no])=><button key={id} className="coverCard" onClick={()=>setView(id)}>
+          <span className="coverCardNo">{no}</span><span className="coverCardArrow">↗</span>
+          <b>{title}</b><small>{sub}</small>
+        </button>)}
+      </section>
+      <footer className="coverFooter"><span>Московский финансовый колледж</span><span>© 2026 SAVE THE FUTURE · VSproduction</span></footer>
+    </div>
+  </main>
+}
 function Home({setView}:{setView:(v:View)=>void}){return <><Hero setView={setView}/><div className="featureGrid">{[["ВЫСТАВКА","СМОТРЕТЬ РАБОТЫ","▧","exhibition"],["УЧАСТНИКУ","ПОДАТЬ РАБОТУ","＋","join"],["ЖЮРИ","ОЦЕНИВАТЬ РАБОТЫ","★","jury"],["РЕЗУЛЬТАТЫ","ИТОГИ КОНКУРСА","◉","results"],["О КОНКУРСЕ","ЦЕЛИ И НОМИНАЦИИ","i","about"]].map(([a,b,c,v])=><button className="feature" key={v} onClick={()=>setView(v as View)}><span>{c}</span><b>{a}</b><small>{b}</small></button>)}</div><footer>Московский финансовый колледж · © 2026 SAVE THE FUTURE | VSproduction</footer></>}
 function Page({title,lead,children}:{title:string;lead?:string;children?:ReactNode}){return <main className="page"><div className="pageHead"><Title level="1">{title}</Title>{lead&&<Text className="lead">{lead}</Text>}</div>{children}</main>}
 function PosterCard({w,onClick}:{w:Submission;onClick:()=>void}){return <Card className="posterCard" onClick={onClick}><div className="posterVisual">{w.imageUrl?<img src={w.imageUrl}/>:<><span className="posterNo">#{w.posterNo}</span><strong>{w.title}</strong><small>{w.idea}</small></>}</div><Div><Text weight="2">#{w.posterNo} · {w.interactive?"INTERACTIVE":"DIGITAL POSTER"}</Text><Text className="muted">«Этот постер заставил меня задуматься» · {w.audience}</Text></Div></Card>}
