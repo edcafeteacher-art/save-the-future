@@ -10,7 +10,7 @@ bridge.send("VKWebAppInit").catch(() => {});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfigProvider appearance="dark">
+    <ConfigProvider colorScheme="dark">
       <AdaptivityProvider>
         <AppRoot>
           <App />
