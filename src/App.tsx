@@ -46,7 +46,7 @@ function ApprovedCover({setView}:{setView:(v:View)=>void}){
           </div>
         </div>
         <div className="coverPhoto" aria-hidden="true">
-          <img src="/save-the-future/save-future-hero-photo-clean.webp" alt=""/>
+          <img src="/save-the-future/approved-cover-final.webp" alt=""/>
           <div className="coverPhotoShade"/>
           <div className="coverPhotoLabel"><span>SMART</span><b>CHOICES</b><small>today → tomorrow</small></div>
         </div>
